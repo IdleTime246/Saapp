@@ -1,0 +1,84 @@
+@use "theme/globals" as *;
+
+:host {
+    --icon-size: 32px;
+    --extra-icon-size: 12px;
+
+    ion-item ::ng-deep core-user-avatar {
+        --core-avatar-size: var(--icon-size);
+
+        .core-avatar-extra-img {
+            margin: 0 !important;
+            position: absolute;
+            right: -4px;
+            bottom: -4px;
+            --module-icon-padding: 0.2rem;
+        }
+
+        .core-avatar-extra-img {
+            background: var(--background-color);
+            border-radius: var(--mdl-shape-borderRadius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            img {
+                max-width: var(--extra-icon-size);
+                max-height: var(--extra-icon-size);
+                width: var(--extra-icon-size);
+                height: var(--extra-icon-size);
+                display: block;
+            }
+        }
+
+        :host-context(body.dark) .core-avatar-extra-img {
+            background-color: var(--white);
+            padding: 2px;
+            filter: contrast(1.2);
+        }
+    }
+
+    div.core-notification-icon {
+        max-width: var(--icon-size);
+        max-height: var(--icon-size);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: var(--icon-size);
+            height: var(--icon-size);
+            padding: 4px;
+            object-fit: contain;
+        }
+
+        ion-icon {
+            font-size: var(--icon-size);
+        }
+
+        padding: 0px;
+        background: var(--background-color);
+        border-radius: var(--core-avatar-radius);
+        @include margin(6px, 8px, 6px, 0px);
+    }
+
+    :host-context(body.dark) div.core-notification-icon {
+        background-color: var(--white);
+
+        img {
+            filter: contrast(1.1);
+        }
+    }
+
+    .core-notification-img {
+        @include margin(6px, 8px, 6px, 0px);
+        width: var(--icon-size);
+        height: var(--icon-size);
+        object-fit: cover;
+        border-radius: var(--core-avatar-radius);
+    }
+
+    :host-context(body.dark) .core-notification-img {
+        border: 1px solid var(--gray-700);
+    }
+}

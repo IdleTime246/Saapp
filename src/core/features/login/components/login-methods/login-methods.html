@@ -1,0 +1,28 @@
+<!-- Eliminado separador 'o' -->
+
+@if (loginMethods.length) {
+    <div class="core-login-methods">
+        @for (method of loginMethods; track method) {
+            <ion-button [fill]="'outline'" class="ion-text-wrap ion-margin ion-no-margin-horizontal"
+                (click)="method.action()" [ariaLabel]="method.name" expand="block">
+                @if (method.icon) {
+                    <ion-icon [name]="method.icon" slot="start" />
+                }
+                <ion-label>{{ method.name }}</ion-label>
+            </ion-button>
+        }
+    </div>
+}
+
+<!-- Eliminado botón de escanear QR -->
+
+<!-- Identity providers. -->
+@if (identityProviders.length) {
+    <ion-list class="core-login-identity-providers">
+        <h2 class="item-heading">{{ 'core.login.potentialidps' | translate }}</h2>
+        @for (provider of identityProviders; track provider) {
+            <core-identity-provider [provider]="provider" [launchurl]="siteConfig?.launchurl"
+                [redirectData]="redirectData" [siteUrl]="siteUrl" />
+        }
+    </ion-list>
+}

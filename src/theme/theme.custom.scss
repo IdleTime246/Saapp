@@ -1,0 +1,58 @@
+/*
+ * App CUSTOM theme SCSS
+ * ----------------------------------------------------------------------------
+ * Savio UTB - Merged theme (best of both)
+ */
+
+/*
+ * Light Theme
+ * -------------------------------------------
+ */
+
+@import "theme/globals";
+
+:root {
+    /* UTB Header/Tabs */
+    /* Removed custom blue/cyan header and tab colors to default to grayscale */
+
+    /* Ionic secondary color */
+    --ion-color-secondary: #{$gris-medio};
+    --ion-color-secondary-rgb: #{red($gris-medio)}, #{green($gris-medio)}, #{blue($gris-medio)};
+
+    /* Custom colors */
+    --core-link-color: #{$azul-savio-oscuro};
+    --core-combobox-background: #{$verde-savio};
+    --core-combobox-border-color: #{$verde-savio-oscuro};
+    --core-combobox-color: var(--white);
+    --combobox-background-hover: #{$verde-savio-hover};
+    --ion-card-background: #{$gris-claro};
+    --core-login-method-background: var(--white);
+}
+
+/*
+ * Dark Theme
+ * -------------------------------------------
+ */
+:root.dark {
+    --core-header-toolbar-background: #{$modo-oscuro};
+    --core-header-toolbar-color: var(--text-color);
+    --core-bottom-tabs-background: #{$modo-oscuro};
+    --core-bottom-tabs-color-selected: white;
+
+    --item-divider-background: #{$modo-oscuro};
+    --color-tabs-background: #{$modo-oscuro};
+    --core-link-color: #{$azul-savio};
+    --ion-card-background: #{$modo-oscuro-oscuro};
+    --core-tabs-background: #{$modo-oscuro};
+    --core-login-method-background: #{$modo-oscuro};
+
+    /* Combobox dark */
+    --core-combobox-background: #{$verde-savio-oscuro};
+    --core-combobox-border-color: #{$verde-savio};
+    --combobox-background-hover: #{$verde-savio};
+    --core-combobox-color: var(--white);
+}
+
+ion-content.limited-width > :not([slot]) {
+    justify-content: center;
+}

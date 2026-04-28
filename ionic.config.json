@@ -1,0 +1,12 @@
+{
+  "name": "moodlemobile",
+  "integrations": {
+    "cordova": {},
+    "capacitor": {}
+  },
+  "type": "angular",
+  "hooks": {
+    "build:before": "./scripts/copy-assets.js",
+    "serve:before": "./scripts/copy-assets.js"
+  }
+}

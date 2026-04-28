@@ -1,0 +1,178 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button [text]="'core.back' | translate" />
+        </ion-buttons>
+
+        <ion-title>
+            <h1>{{ 'core.more' | translate }}</h1>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-list>
+        @if (!handlersLoaded) {
+        <ion-item class="ion-text-center">
+            <ion-label>
+                <ion-spinner [attr.aria-label]="'core.loading' | translate" />
+            </ion-label>
+        </ion-item>
+        } @else {
+        <!-- Main Sections (if any don't fit in tabs) -->
+        @if (mainHandlers && mainHandlers.length > 0) {
+        <ion-item-group>
+            <ion-item-divider color="light">
+                <ion-label>Más secciones</ion-label>
+            </ion-item-divider>
+
+            <ion-item button *ngFor="let handler of mainHandlers" [class]="['core-moremenu-handler', handler.class]"
+                (click)="openHandler(handler)" [attr.aria-label]="handler.title | translate" [detail]="true">
+                <ion-icon [name]="handler.icon" slot="start" aria-hidden="true" />
+                <ion-label>
+                    <p class="item-heading">{{ handler.title | translate}}</p>
+                </ion-label>
+                @if (handler.showBadge) {
+                <ion-badge slot="end" [hidden]="handler.loading || !handler.badge" aria-hidden="true">
+                    {{handler.badge}}
+                </ion-badge>
+                }
+            </ion-item>
+        </ion-item-group>
+        }
+
+        <!-- Services Section -->
+        <ion-item-group>
+            <ion-item-divider color="light">
+                <ion-label>Servicios</ion-label>
+            </ion-item-divider>
+
+            <ion-item button *ngFor="let handler of otherHandlers" [class]="['core-moremenu-handler', handler.class]"
+                (click)="openHandler(handler)" [attr.aria-label]="handler.title | translate" [detail]="true">
+                <ion-icon [name]="handler.icon" slot="start" aria-hidden="true" />
+                <ion-label>
+                    <p class="item-heading">{{ handler.title | translate}}</p>
+                </ion-label>
+            </ion-item>
+
+            @if (showScanQR) {
+            <ion-item button (click)="scanQR()" [detail]="true">
+                <ion-icon name="fas-qrcode" slot="start" aria-hidden="true" />
+                <ion-label>
+                    <p class="item-heading">{{ 'core.scanqr' | translate }}</p>
+                </ion-label>
+            </ion-item>
+            }
+        </ion-item-group>
+
+        <!-- Custom Items -->
+        @if (customItems && customItems.length) {
+        <ion-item-group>
+            <ion-item-divider color="light">
+                <ion-label>Enlaces de interés</ion-label>
+            </ion-item-divider>
+            <ng-container *ngFor="let item of customItems">
+                @if (item.type !== 'embedded') {
+                <ion-item button [href]="item.url" [attr.aria-label]="item.label" core-link
+                    [capture]="item.type === 'app'" [inApp]="item.type === 'inappbrowser'"
+                    class="core-moremenu-customitem" [detail]="true">
+                    <ion-icon [name]="item.icon" slot="start" aria-hidden="true" />
+                    <ion-label>
+                        <p class="item-heading">{{item.label}}</p>
+                    </ion-label>
+                </ion-item>
+                } @else {
+                <ion-item button (click)="openItem(item)" [attr.aria-label]="item.label"
+                    class="core-moremenu-customitem" [detail]="true">
+                    <ion-icon [name]="item.icon" slot="start" aria-hidden="true" />
+                    <ion-label>
+                        <p class="item-heading">{{item.label}}</p>
+                    </ion-label>
+                </ion-item>
+                }
+            </ng-container>
+        </ion-item-group>
+        }
+
+        <!-- App Settings Section -->
+        <ion-item-group>
+            <ion-item-divider color="light">
+                <ion-label>Configuración</ion-label>
+            </ion-item-divider>
+
+            @if (defaultTimeLabel) {
+                <ion-item>
+                    <ion-select [(ngModel)]="defaultTimeLabel" (click)="changeDefaultTime($event)"
+                        label="Tiempo de notificación de actividad">
+                        <ion-select-option [value]="defaultTimeLabel">{{ defaultTimeLabel }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+            }
+
+            <ion-item button (click)="openSettings('general')" [attr.aria-label]="'core.settings.general' | translate"
+                [detail]="true">
+                <ion-icon name="fas-wrench" slot="start" aria-hidden="true" />
+                <ion-label>
+                    <p class="item-heading">{{ 'core.settings.general' | translate }}</p>
+                </ion-label>
+            </ion-item>
+
+            @if (isIOS) {
+            <ion-item button (click)="openSettings('sharedfiles/list/root', { manage: true })"
+                [attr.aria-label]="'core.sharedfiles.sharedfiles' | translate" [detail]="true">
+                <ion-icon name="fas-folder" slot="start" aria-hidden="true" />
+                <ion-label>
+                    <p class="item-heading">{{ 'core.sharedfiles.sharedfiles' | translate }}</p>
+                </ion-label>
+            </ion-item>
+            }
+
+            <ion-item button (click)="openSettings('about')" [attr.aria-label]="'core.settings.about' | translate"
+                [detail]="true">
+                <ion-icon name="fas-award" slot="start" aria-hidden="true" />
+                <ion-label>
+                    <p class="item-heading">{{ 'core.settings.about' | translate }}</p>
+                </ion-label>
+            </ion-item>
+        </ion-item-group>
+
+        <!-- User Account Section -->
+        <ion-item-group>
+            <ion-item-divider color="light">
+                <ion-label>Cuenta de usuario</ion-label>
+            </ion-item-divider>
+
+            @if (siteInfo) {
+            <ion-item class="core-usermenu-profile ion-text-wrap" lines="full" [detail]="false">
+                <core-user-avatar [site]="siteInfo" [userId]="siteInfo.userid" [linkProfile]="false" slot="start" />
+                <ion-label>
+                    <p class="item-heading">{{ siteInfo.fullname }}</p>
+                </ion-label>
+            </ion-item>
+            }
+
+            <ion-item button (click)="openGrades()" [attr.aria-label]="'core.grades.grades' | translate"
+                [detail]="true">
+                <ion-icon name="fas-chart-bar" slot="start" aria-hidden="true" />
+                <ion-label>
+                    <p class="item-heading">{{ 'core.grades.grades' | translate }}</p>
+                </ion-label>
+            </ion-item>
+
+            <ion-item button (click)="openPreferences()" [attr.aria-label]="'core.settings.preferences' | translate"
+                [detail]="true">
+                <ion-icon name="fas-user-gear" slot="start" aria-hidden="true" />
+                <ion-label>
+                    <p class="item-heading">{{ 'core.settings.preferences' | translate }}</p>
+                </ion-label>
+            </ion-item>
+
+            <ion-item button (click)="logout()" [attr.aria-label]="'core.mainmenu.logout' | translate" [detail]="true">
+                <ion-icon name="fas-right-from-bracket" slot="start" aria-hidden="true" />
+                <ion-label>
+                    <p class="item-heading">{{ 'core.mainmenu.logout' | translate }}</p>
+                </ion-label>
+            </ion-item>
+        </ion-item-group>
+        }
+    </ion-list>
+</ion-content>

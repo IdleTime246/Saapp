@@ -1,0 +1,62 @@
+.core-login-page {
+    ion-content {
+        --background: url('/assets/img/login-bg-utb.png') repeat;
+        --background-size: cover;
+        background-image: var(--core-login-background);
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        --ion-item-background: var(--core-login-background);
+        --color: var(--core-login-text-color);
+
+        form .item,
+        form .item ion-label {
+            --background: var(--core-login-input-background);
+            --color: var(--core-login-input-color);
+        }
+    }
+
+    .core-login-methods-container {
+        background: var(--core-login-method-background);
+        padding: 24px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    ion-list.list-md {
+        --ion-item-background: var(--core-login-input-background);
+
+        ion-input {
+            --background: var(--core-login-input-background);
+            --color: var(--core-login-input-color);
+        }
+    }
+
+    &.core-loading-page {
+        ion-content {
+            --loading-background: var(--core-login-background);
+        }
+    }
+
+    &.core-onboarding-page {
+        ion-content {
+            background: var(--core-login-background);
+        }
+    }
+
+    .core-login-site-logo {
+        padding-top: 0;
+    }
+
+    .core-sitename {
+        color: #FFF;
+    }
+
+    .core-login-site-logo .core-login-logo {
+        margin-top: 100px !important;
+        margin-bottom: 12px !important;
+        color: #FFF;
+    }
+}

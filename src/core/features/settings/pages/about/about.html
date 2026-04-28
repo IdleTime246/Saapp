@@ -1,0 +1,74 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button [text]="'core.back' | translate" />
+        </ion-buttons>
+        <ion-title>
+            <h1>
+                {{ 'core.settings.about' | translate}}
+            </h1>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="list-item-limited-width ion-padding">
+        <p>{{ 'core.settings.credits_text' | translate }}</p>
+
+        <ion-list-header>
+            <ion-label><strong>{{ 'core.settings.project_supervisor' | translate }}</strong></ion-label>
+        </ion-list-header>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Jairo Serrano</ion-label>
+        </ion-item>
+
+        <ion-list-header class="ion-margin-top">
+            <ion-label><strong>{{ 'core.settings.student_collaborators' | translate }}</strong></ion-label>
+        </ion-list-header>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Isaac Canabal</ion-label>
+        </ion-item>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Daniel Villalba</ion-label>
+        </ion-item>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Isaac Navarro</ion-label>
+        </ion-item>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Julio Villareal</ion-label>
+        </ion-item>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Moises Marin</ion-label>
+        </ion-item>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Sebastian Acosta</ion-label>
+        </ion-item>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Esteban Ramírez</ion-label>
+        </ion-item>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Thomas Quintana</ion-label>
+        </ion-item>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Alejandro Villarreal</ion-label>
+        </ion-item>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Ana Meza</ion-label>
+        </ion-item>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Mario Julio</ion-label>
+        </ion-item>
+        <ion-item class="ion-text-wrap">
+            <ion-label>Alejandro Steinman</ion-label>
+        </ion-item>
+    </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+    <ion-item button class="ion-text-wrap ion-text-center core-about-deviceinfo" [detail]="false"
+        (click)="openPage('deviceinfo')">
+        <ion-label>
+            <p class="item-heading">{{ appName }} {{ versionName }}</p>
+        </ion-label>
+    </ion-item>
+</ion-footer>
